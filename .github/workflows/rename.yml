@@ -1,0 +1,21 @@
+name: Rename game file to index
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename candidate-bots.html to index.html
+        run: |
+          if [ -f candidate-bots.html ]; then
+            git config user.name "fatboiassistant"
+            git config user.email "fatboiassistant@gmail.com"
+            git mv candidate-bots.html index.html
+            git commit -m "Rename candidate-bots.html to index.html"
+            git push
+          else
+            echo "candidate-bots.html not found; nothing to rename"
+          fi
